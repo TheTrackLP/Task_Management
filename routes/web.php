@@ -37,6 +37,10 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
 
     Route::controller(EmployeeController::class)->group(function (){
         Route::get('/employee/list', 'AllEmployees')->name('all.employee');
+        Route::post('/employee/add', 'AddEmployee')->name('add.employee');
+        Route::get('/employee/edit/{id}', 'EditEmployee')->name('edit.employee');
+        Route::post('/employee/update', 'UpdateEmployee')->name('update.employee');
+        Route::get('/employee/delete/{id}', 'DeleteEmployee')->name('delete.employee');
     });
 });
 
