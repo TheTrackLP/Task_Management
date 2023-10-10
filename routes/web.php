@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\EmployeeController;
+use App\Http\Controllers\Backend\AttendanceController;
+
 
 
 
@@ -41,6 +43,10 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
         Route::get('/employee/edit/{id}', 'EditEmployee')->name('edit.employee');
         Route::post('/employee/update', 'UpdateEmployee')->name('update.employee');
         Route::get('/employee/delete/{id}', 'DeleteEmployee')->name('delete.employee');
+    });
+
+    Route::controller(AttendanceController::class)->group(function (){
+        Route::get('/attendance/list', 'ShowAttendance')->name('all.attendance');
     });
 });
 

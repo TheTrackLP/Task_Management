@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
-    //
+    public function ShowAttendance(){
+        return view('backend.attendance.all_attendance');
+    }
 }

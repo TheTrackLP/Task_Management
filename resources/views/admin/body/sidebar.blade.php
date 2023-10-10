@@ -36,7 +36,7 @@
     <hr class="sidebar-divider my-0">
 
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="{{ route('all.attendance') }}">
             <i class="fas fa-user-check"></i>
             <span>Attendace</span></a>
     </li>
