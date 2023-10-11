@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->integer('prj_id')->nullable();
             $table->string('emp_id')->nullable();
-            $table->timestamp('emp_in')->nullable();
-            $table->timestamp('emp_out')->nullable();
+            $table->string('task_name')->nullable();
+            $table->longText('task_desc')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('tasks');
     }
 };
