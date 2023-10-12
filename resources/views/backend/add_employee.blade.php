@@ -74,6 +74,16 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="username">Username:</label>
+                                <input type="text" name="username" class="form-control" placeholder="Username...">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="password">Password:</label>
+                                <input type="password" name="password" class="form-control" placeholder="********">
+                            </div>
+                        </div>
                         <small class="font-weight-bold">Note: Leave Dates Blank if employee is regular</small>
                         <div class="row">
                             <div class="form-group col-lg-3">

@@ -33,10 +33,12 @@
         <div class="row">
             <div class="form-group col-lg-6">
                 <label>Project Manager:</label>
-                <input type="text" name="manager" class="form-control @error('manager') is-invalid @enderror">
-                @error('manager')
-                <span class="text-danger"> {{ $message }}</span>
-                @enderror
+                <select name="emp_id" class="form-control">
+                    <option value="" disable>Select Employee to assign task to</option>
+                    @foreach($employees as $employee)
+                    <option value="{{$employee->emp_id}}">{{ $employee->name}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group col-lg-6">
                 <label>Team Members:</label>

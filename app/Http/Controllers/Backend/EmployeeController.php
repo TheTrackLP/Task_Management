@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Validator;
 use DB;
 use App\Models\Employee;
+use Hash;
 
 class EmployeeController extends Controller
 {
@@ -27,6 +28,8 @@ class EmployeeController extends Controller
             'position' => 'required',
             'email' => 'required',
             'address' => 'required',
+            'username' => 'required',
+            'password' => 'required',
         ]);
         
         if($valid->fails()){
@@ -37,25 +40,49 @@ class EmployeeController extends Controller
 
             return redirect()->route('all.employee')->with($fail);
         }else{
-            DB::table('employees')->insert([
-                'emp_id' => $request->emp_id,
-                'firstname' => $request->firstname,
-                'middlename' => $request->middlename,
-                'lastname' => $request->lastname,
-                'contact' => $request->contact,
-                'email' => $request->email,
-                'position' => $request->position,
-                'start_date' => $request->start_date,
-                'end_date' => $request->end_date,
-                'address' => $request->address,
-            ]);
 
-            $notif = array(
-                'message' => 'New Employee Successfully',
-                'alert-type' => 'success',
-            );
+            $input['email'] = $request->email;
+            //specific column name and table
+            $rules = array('email' => 'unique:users,email');
 
-            return redirect()->route('all.employee')->with($notif);
+            $existEmail = Validator::make($input, $rules);
+
+            if($existEmail->fails()){
+                $notif = array(
+                    'message' => 'Error, Email Already Exist',
+                    'alert-type' => 'error',
+                );
+                return redirect()->route('all.employee')->with($notif);
+            }else{
+                DB::table('employees')->insert([
+                    'emp_id' => $request->emp_id,
+                    'firstname' => $request->firstname,
+                    'middlename' => $request->middlename,
+                    'lastname' => $request->lastname,
+                    'contact' => $request->contact,
+                    'email' => $request->email,
+                    'position' => $request->position,
+                    'start_date' => $request->start_date,
+                    'end_date' => $request->end_date,
+                    'address' => $request->address,
+                ]);
+
+                DB::table('users')->insert([
+                    'emp_id' => $request->emp_id,
+                    'name' => $request->firstname,
+                    'username' => $request->username,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'role' => 'user',
+                    'status' => 'active',
+                ]);
+                $notif = array(
+                    'message' => 'New Employee Successfully',
+                    'alert-type' => 'success',
+                );
+
+                return redirect()->route('all.employee')->with($notif);
+            }
         }
     }
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Validator;
 use App\Models\Projects;
+use App\Models\Employee;
 
 class ProjectController extends Controller
 {
@@ -16,7 +17,11 @@ class ProjectController extends Controller
     }
 
     public function AddProjetcs(){
-        return view('backend.projects.add_projects');
+        $employees = DB::table('employees')
+        ->select('*')
+        ->selectRaw("CONCAT(lastname, ', ', firstname, ' ', middlename) as name")
+        ->get(); 
+        return view('backend.projects.add_projects', compact('employees'));
     }
 
     public function ViewProjects($id){
