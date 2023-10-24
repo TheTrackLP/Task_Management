@@ -66,6 +66,4 @@
     </div>
 
 </div>
-
-@include('backend.add_employee')
 @endsection

@@ -57,12 +57,14 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
         Route::post('projects/update', 'UpdateProjects')->name('update.projects');
         Route::get('/projects/delete/{id}', 'DeleteProjects')->name('delete.projects');
         Route::get('/projects/view/{id}', 'ViewProjects')->name('view.projects');
-
+        Route::post('/projects/addMember', 'AddPrjMember')->name('addmember.projects');
+        Route::get('/project/member/{id}', 'DeleteMember')->name('delete.member');
     });
 
     Route::controller(TaskController::class)->group(function (){
         Route::get('/task/list', 'ShowTasks')->name('all.tasks');
-        Route::get('/task/add', 'AddTasks')->name('add.tasks');
+        Route::post('/task/store', 'StoreTasks')->name('store.tasks');
+        Route::get('/task/view/{id}', 'ViewTask')->name('view.tasks');
     });
 });
 

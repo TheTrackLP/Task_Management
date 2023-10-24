@@ -32,35 +32,77 @@
             </div>
         </div>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
-        </tbody>
-    </table>
+    <hr>
+    <div class="row">
+        <div class="col-lg-5 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title font-weight-bold">Team Members</h4>
+                    <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addMember">Add
+                        Member</button>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Position</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($members as $member)
+                            <tr>
+                                <td>{{$member->name}}</td>
+                                <td>{{$member->position}}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('delete.member', $member->id) }}" class="btn btn-danger"
+                                        id="delete"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title font-weight-bold">Tasks</h4>
+                    <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addprjTask">Add new
+                        Task</button>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center"> Task Name </th>
+                                <th class="text-center"> Task Assigned </th>
+                                <th class="text-center"> Date </th>
+                                <th class="text-center"> Action </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($taskData as $data)
+                            @if($prjData->id == $data->prj_id)
+                            <tr>
+                                <td>{{ $data->task_name}}</td>
+                                <td>{{ $data->name }}</td>
+                                <td>
+                                    <p>{{ date('M d, Y', strtotime($data->start_date)) }}</p>
+                                    <p>{{ date('M d, Y', strtotime($data->due_date)) }}</p>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+@include('backend.projects.task.addprj_task')
+@include('backend.projects.addmember_projects')
 @endsection

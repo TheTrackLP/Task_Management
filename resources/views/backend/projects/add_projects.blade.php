@@ -34,16 +34,10 @@
             <div class="form-group col-lg-6">
                 <label>Project Manager:</label>
                 <select name="emp_id" class="form-control">
-                    <option value="" disable>Select Employee to assign task to</option>
+                    <option value="" disable>Select Manager:</option>
                     @foreach($employees as $employee)
-                    <option value="{{$employee->emp_id}}">{{ $employee->name}}</option>
+                    <option value="{{$employee->emp_id}}">{{ $employee->name}} | {{ $employee->position}}</option>
                     @endforeach
-                </select>
-            </div>
-            <div class="form-group col-lg-6">
-                <label>Team Members:</label>
-                <select class="form-control" name="members">
-                    <option value="asd">Team</option>
                 </select>
             </div>
         </div>

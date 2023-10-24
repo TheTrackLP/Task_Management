@@ -1,4 +1,4 @@
-<div class="modal fade" id="addTask" tabindex="-1" role="dialog">
+<div class="modal fade" id="addprjTask" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <label for="emp_id">Give this taks to:</label>
-                            <input type="hidden" name="prj_id" value="{{ null }}">
+                            <input type="hidden" class="form-control" name="prj_id" value="{{ $prjData->id }}">
                             <select name="emp_id" class="form-control">
                                 <option value="" disable>Select Employee to assign task to</option>
                                 @foreach($employees as $emp)

@@ -15,8 +15,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h4 class="mb-5 font-weight-bold text-primary">Tasks List</h4>
-            <a href="{{ route('add.tasks') }}" class="btn btn-primary float-right" data-toggle="modal"
-                data-target="#addTask">Add New Task</a>
+            <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addTask">Add New Task</button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -33,27 +32,34 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($allTasks as $key => $data)
                         <tr>
-                            <td class="text-center"></td>
+                            <td class="text-center">{{ $key+1 }}</td>
                             <td>
-                                <p></p>
-                                <small class="min"></small>
+                                <p>{{ $data->task_name }}</p>
                             </td>
-                            <td></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
+                            <td>
+                                <p>{{ $data->prj_name }}</p>
+                            </td>
+                            <td class="text-center">{{ date('M d, y', strtotime($data->start_date)) }}</td>
+                            <td class="text-center">{{ date('M d, y', strtotime($data->due_date)) }}</td>
                             <td class="text-center">
+                                @if($data->status == 0)
                                 <span class="badge badge-secondary">Pending</span>
+                                @elseif($data->status == 1)
                                 <span class="badge badge-info">In Progress</span>
+                                @elseif($data->status == 2)
                                 <span class="badge badge-success">Complete</span>
-
+                                @endif
                             </td>
                             <td class="text-center">
-                                <a href="#" class="btn btn-success"> <i class="fas fa-eye"></i></a>
+                                <a href="{{ route('view.tasks', $data->id) }}" class="btn btn-success"> <i
+                                        class="fas fa-eye"></i></a>
                                 <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                 <a href="#" id="delete" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -28,7 +28,7 @@
                         @foreach($allEmployees as $key => $data)
                         <tr>
                             <td>{{ $key+1 }}</td>
-                            <td>{{ $data->emp_id }}</td>
+                            <td class="text-center">{{ $data->emp_id }}</td>
                             <td>{{ $data->name }}</td>
                             <td>
                                 <p><i class="fas fa-at"></i> {{ $data->email }}</p>
