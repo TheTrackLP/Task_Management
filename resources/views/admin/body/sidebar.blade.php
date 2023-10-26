@@ -19,8 +19,53 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('user.dashboard') }}">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('all.employee') }}">
+            <i class="fas fa-list"></i>
+            <span>Employee List</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('all.attendance') }}">
+            <i class="fas fa-user-check"></i>
+            <span>Attendace</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('all.projects') }}">
+            <i class="fas fa-list"></i>
+            <span class="text-">Projects</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('all.tasks') }}">
+            <i class="fas fa-list"></i>
+            <span class="text-">Tasks</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+
+    <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+            <i class="fas fa-users"></i>
+            <span class="text-">Users</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+
+
 </ul>

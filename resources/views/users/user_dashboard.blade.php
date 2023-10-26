@@ -1,4 +1,4 @@
-@extends('user.header')
+@extends('users.header')
 @section('user')
 
 <div class="container-fluid">

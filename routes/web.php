@@ -3,10 +3,13 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\AttendanceController;
 use App\Http\Controllers\Backend\ProjectController;
 use App\Http\Controllers\Backend\TaskController;
+use App\Http\Controllers\Backend\MyTaskController;
+
 
 
 /*
@@ -36,6 +39,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function (){
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+    Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 
     Route::controller(EmployeeController::class)->group(function (){
         Route::get('/employee/list', 'AllEmployees')->name('all.employee');
@@ -70,4 +74,13 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
     });
 });
 
+
+Route::middleware(['auth', 'role:user'])->group(function (){
+    Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard');
+    Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
+    
+    Route::controller(MyTaskController::class)->group(function (){
+        Route::get('/task', 'MyTasks')->name('my.tasks');
+    });
+});
 require __DIR__.'/auth.php';
