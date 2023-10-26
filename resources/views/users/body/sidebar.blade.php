@@ -17,7 +17,6 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
-    <!-- Nav Item - Dashboard -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('user.dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -25,7 +24,14 @@
     </li>
     <hr class="sidebar-divider my-0">
 
-    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-tasks"></i>
+            <span>Project</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+
     <li class="nav-item">
         <a class="nav-link" href="{{ route('my.tasks') }}">
             <i class="fas fa-tasks"></i>

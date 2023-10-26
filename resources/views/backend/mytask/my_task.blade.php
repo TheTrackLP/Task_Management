@@ -51,11 +51,8 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('view.tasks', $data->id) }}" class="btn btn-success"> <i
-                                        class="fas fa-eye"></i></a>
-                                <a href="{{ route('edit.tasks', $data->id) }}" class="btn btn-warning"><i
+                                <a href="{{ route('edit.mytasks', $data->id) }}" class="btn btn-warning"><i
                                         class="fas fa-edit"></i></a>
-                                <a href="#" id="delete" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         @endforeach

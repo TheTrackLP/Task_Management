@@ -81,6 +81,8 @@ Route::middleware(['auth', 'role:user'])->group(function (){
     
     Route::controller(MyTaskController::class)->group(function (){
         Route::get('/task', 'MyTasks')->name('my.tasks');
+        Route::get('/task/{id}', 'EditMyTask')->name('edit.mytasks');
+        Route::post('/task/update', 'UpdateMyTask')->name('update.mytask');
     });
 });
 require __DIR__.'/auth.php';
