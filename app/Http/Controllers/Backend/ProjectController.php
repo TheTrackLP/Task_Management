@@ -91,12 +91,17 @@ class ProjectController extends Controller
     
     public function EditProjects($id){
         $projectData = DB::table('projects')
-        ->select('projects.*', DB::raw("CONCAT(employees.lastname, ', ', employees.firstname, ' ', employees.middlename) as manager"))
+        ->select('projects.*', DB::raw("CONCAT(employees.lastname, ', ', employees.firstname, ' ', employees.middlename) as manager, employees.position"))
         ->join('employees', 'employees.emp_id', '=', 'projects.emp_id')
         ->where('projects.id', '=', $id)
         ->first();
+
+        $employees = DB::table('employees')
+        ->select('*')
+        ->selectRaw("CONCAT(lastname, ', ', firstname, ' ', middlename) as name")
+        ->get();
         
-        return view('backend.projects.edit_projects', compact('projectData'));
+        return view('backend.projects.edit_projects', compact('projectData', 'employees'));
     }
 
     public function UpdateProjects(Request $request){
@@ -107,8 +112,7 @@ class ProjectController extends Controller
             'status' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'manager' => 'required',
-            'members' => 'required',
+            'emp_id' => 'required',
             'description' => 'required',
         ]);
 
@@ -120,13 +124,14 @@ class ProjectController extends Controller
 
             return redirect()->route('all.projects')->with($fail);
         } else{
+            $prj_id = $request->id;
+
             Projects::findorfail($prj_id)->update([
                 'name' => $request->name,
                 'status' => $request->status,
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
-                'manager' => $request->manager,
-                'members' => $request->team_members,
+                'emp_id' => $request->emp_id,
                 'description' => $request->description,
             ]);
 

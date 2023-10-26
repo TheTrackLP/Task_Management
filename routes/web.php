@@ -65,6 +65,8 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
         Route::get('/task/list', 'ShowTasks')->name('all.tasks');
         Route::post('/task/store', 'StoreTasks')->name('store.tasks');
         Route::get('/task/view/{id}', 'ViewTask')->name('view.tasks');
+        Route::get('/task/edit/{id}', 'EditTask')->name('edit.tasks');
+        Route::post('/tasks/update', 'UpdateTask')->name('update.tasks');
     });
 });
 

@@ -18,8 +18,8 @@
                 <label>Status:</label>
                 <select class="form-control" name="status">
                     <option value="0" {{ $projectData->status == 0 ? 'selected' : ''}}>Pending</option>
-                    <option value="2" {{ $projectData->status == 1 ? 'selected' : ''}}>On Progress</option>
-                    <option value="1" {{ $projectData->status == 2 ? 'selected' : ''}}>Complete</option>
+                    <option value="1" {{ $projectData->status == 1 ? 'selected' : ''}}>On Progress</option>
+                    <option value="2" {{ $projectData->status == 2 ? 'selected' : ''}}>Complete</option>
                 </select>
             </div>
         </div>
@@ -36,11 +36,14 @@
         <div class="row">
             <div class="form-group col-lg-6">
                 <label>Project Manager:</label>
-                <input type="text" name="emp_id" class="form-control @error('emp_id') is-invalid @enderror"
-                    value="{{ $projectData->manager }}">
-                @error('emp_id')
-                <span class="text-danger"> {{ $message }}</span>
-                @enderror
+                <select name="emp_id" class="form-control">
+                    <option value="{{ $projectData->emp_id }}" readonly>{{ $projectData->manager }} |
+                        {{ $projectData->position }}</option>
+                    @foreach($employees as $employee)
+                    <option value="{{$employee->emp_id}}">{{ $employee->name}} |
+                        {{ $employee->position}}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="row">

@@ -22,7 +22,6 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="text-center">
                         <tr>
-                            <th>#</th>
                             <th>Task</th>
                             <th>Project</th>
                             <th>Date Started</th>
@@ -32,9 +31,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($allTasks as $key => $data)
+                        @foreach($allTasks as $data)
                         <tr>
-                            <td class="text-center">{{ $key+1 }}</td>
                             <td>
                                 <p>{{ $data->task_name }}</p>
                             </td>
@@ -55,7 +53,8 @@
                             <td class="text-center">
                                 <a href="{{ route('view.tasks', $data->id) }}" class="btn btn-success"> <i
                                         class="fas fa-eye"></i></a>
-                                <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('edit.tasks', $data->id) }}" class="btn btn-warning"><i
+                                        class="fas fa-edit"></i></a>
                                 <a href="#" id="delete" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
