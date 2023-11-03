@@ -60,12 +60,18 @@
     <hr class="sidebar-divider my-0">
 
     <li class="nav-item">
+        <a class="nav-link" href="{{ route('all.leave') }}">
+            <i class="fas fa-list"></i>
+            <span class="text-">Leave Management</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+
+    <li class="nav-item">
         <a class="nav-link" href="tables.html">
             <i class="fas fa-users"></i>
             <span class="text-">Users</span></a>
     </li>
 
     <hr class="sidebar-divider my-0">
-
-
 </ul>

@@ -9,6 +9,9 @@ use App\Http\Controllers\Backend\AttendanceController;
 use App\Http\Controllers\Backend\ProjectController;
 use App\Http\Controllers\Backend\TaskController;
 use App\Http\Controllers\Backend\MyTaskController;
+use App\Http\Controllers\Backend\LeaveController;
+use App\Http\Controllers\Backend\MyLeaveController;
+
 
 
 
@@ -72,6 +75,10 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
         Route::get('/task/edit/{id}', 'EditTask')->name('edit.tasks');
         Route::post('/tasks/update', 'UpdateTask')->name('update.tasks');
     });
+
+    Route::controller(LeaveController::class)->group(function (){
+        Route::get('/leave/list', 'AllLeave')->name('all.leave');
+    });
 });
 
 
@@ -83,6 +90,13 @@ Route::middleware(['auth', 'role:user'])->group(function (){
         Route::get('/task', 'MyTasks')->name('my.tasks');
         Route::get('/task/{id}', 'EditMyTask')->name('edit.mytasks');
         Route::post('/task/update', 'UpdateMyTask')->name('update.mytask');
+    });
+
+    Route::controller(MyLeaveController::class)->group(function (){
+        Route::get('/leave/request', 'MyLeave')->name('my.leave');
+        Route::post('/leave/store', 'StoreMyLeave')->name('store.myleave');
+        Route::get('/leave/{id}', 'DeleteMyleave')->name('delete.myleave');
+
     });
 });
 require __DIR__.'/auth.php';
