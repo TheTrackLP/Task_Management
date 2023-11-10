@@ -110,6 +110,7 @@ class TaskController extends Controller
                 'task_desc' => $request->tasks_desc,
                 'start_date' => $request->start_date,
                 'due_date' => $request->due_date,
+                'task_desc' => $request->task_desc,
                 'status' => $request->status,
             ]);
 

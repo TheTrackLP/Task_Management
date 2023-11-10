@@ -37,10 +37,9 @@
             <div class="form-group col-lg-6">
                 <label>Project Manager:</label>
                 <select name="emp_id" class="form-control">
-                    <option value="{{ $projectData->emp_id }}" readonly>{{ $projectData->manager }} |
-                        {{ $projectData->position }}</option>
                     @foreach($employees as $employee)
-                    <option value="{{$employee->emp_id}}">{{ $employee->name}} |
+                    <option value="{{$employee->emp_id}}"
+                        {{ $employee->emp_id == $projectData->emp_id ? 'selected' : '' }}>{{ $employee->name}} |
                         {{ $employee->position}}</option>
                     @endforeach
                 </select>

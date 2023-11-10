@@ -9,9 +9,10 @@
                 <input type="hidden" name="id" value="{{ $taskData->id }}">
                 <label>Task Assigned to:</label>
                 <select name="emp_id" class="form-control">
-                    <option value="{{ $taskData->emp_id }}">{{ $taskData->name }} | {{ $taskData->position }}</option>
                     @foreach($employees as $employee)
-                    <option value="{{ $employee->emp_id }}">{{ $employee->name }} | {{ $employee->position}}</option>
+                    <option value="{{ $employee->emp_id }}"
+                        {{ $employee->emp_id == $taskData->emp_id ? 'selected' : ''}}>{{ $employee->name }} |
+                        {{ $employee->position}}</option>
                     @endforeach
                 </select>
             </div>
