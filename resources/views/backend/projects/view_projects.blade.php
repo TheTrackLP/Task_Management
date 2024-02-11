@@ -65,14 +65,14 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th class="text-center">#</th>
                                 <th>Name</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
+                                <td class="text-center">1</td>
                                 <td>Name</td>
                                 <td>Delete</td>
                             </tr>
@@ -95,23 +95,60 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th class="text-center">Description</th>
+                                    <th class="text-center">Task Name</th>
+                                    <th class="text-center">Start Date</th>
+                                    <th class="text-center">Due Date</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                $i = 1;
+                                @endphp
+                                @foreach($taskPrj as $prj)
                                 <tr>
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">Description
+                                    <td class="text-center">{{ $i++ }}</td>
+                                    <td>
+                                        {{ $prj->task_name }}
                                     </td>
-                                    <td class="text-center">Status</td>
                                     <td class="text-center">
-                                        <button class="btn btn-warning text-white"><i class="fas fa-edit"></i></button>
-                                        <a class="btn btn-danger" id="delete" href=""><i
-                                                class="fas fa-trash-alt"></i></a>
+                                        {{ date("M j, Y, g:i a", strtotime($prj->start_date)) }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ date("M j, Y, g:i a", strtotime($prj->due_date)) }}
+                                    </td>
+                                    <td class="text-center">
+                                        @if($prj->status == 0)
+                                        <span class="badge text-bg-secondary">Pending</span>
+                                        @elseif($prj->status == 1)
+                                        <span class="badge text-bg-primary">Active</span>
+                                        @elseif($prj->status == 2)
+                                        <span class="badge text-bg-success">Complete</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-info dropdown-toggle text-white"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#" class="dropdown-item"><i class="fas fa-eye"></i>
+                                                        View</a>
+                                                </li>
+                                                <li><button class="dropdown-item" value="{{ $prj->id }}" id="editBtn"><i
+                                                            class="fas fa-edit"></i>
+                                                        Edit</button></li>
+                                                <li> <a class="dropdown-item" id="delete"
+                                                        href="{{ route('delete.tasks', $prj->id) }}"><i
+                                                            class="fas fa-trash"></i>
+                                                        Delete</a></li>
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

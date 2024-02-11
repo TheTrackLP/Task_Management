@@ -7,6 +7,8 @@ use App\Http\Controllers\Backend\TaskController;
 use App\Http\Controllers\Backend\ProjectController;
 use App\Http\Controllers\Backend\LeaveController;
 use App\Http\Controllers\Backend\EmployeeController;
+use App\Http\Controllers\Backend\SettingsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +69,10 @@ Route::middleware(['auth', 'roles:admin'])->group(function(){
 
     Route::controller(LeaveController::class)->group(function(){
         Route::get('/admin/leaves', 'AllLeaves')->name('all.leaves');
+    });
+
+    Route::controller(SettingsController::class)->group(function(){
+        Route::get('/admin/settings', 'Settings')->name('settings');
     });
 });
 require __DIR__.'/auth.php';

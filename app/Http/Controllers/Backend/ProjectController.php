@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Project;
+use App\Models\Task;
 use Validator;
 use DB;
 
@@ -76,7 +77,11 @@ class ProjectController extends Controller
         ->selectRaw("CONCAT(lastname, ', ', firstname, ' ', middlename) as name")
         ->get();
 
-        return view('backend.projects.view_projects', compact('projects', 'emps'));
+        $taskPrj = DB::table('tasks')
+                    ->where('prj_id', $id)
+                    ->get();
+
+        return view('backend.projects.view_projects', compact('projects', 'emps', 'taskPrj'));
     }
 
     public function EditProjects($id){

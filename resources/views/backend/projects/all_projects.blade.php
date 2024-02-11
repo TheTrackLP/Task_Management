@@ -6,15 +6,6 @@ p {
     padding: 0;
     margin: 0;
 }
-
-.min {
-    display: block;
-    width: 150px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    height: 25px;
-}
 </style>
 <div class="container-fluid">
     <div class="mb-4"></div>

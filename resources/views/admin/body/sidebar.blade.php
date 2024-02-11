@@ -43,7 +43,7 @@
                     Tasks
                 </a>
                 <hr>
-                <a class="nav-link pb-3 pt-3 text-white" href="#">
+                <a class="nav-link pb-3 pt-3 text-white" href="{{ route('all.leaves') }}">
                     <div class="icon-field"><i class="fas fa-list-alt"></i></div>
                     Leave Management
                 </a>
@@ -76,7 +76,7 @@
                     </nav>
                 </div>
                 <hr>
-                <a class="nav-link pb-3 pt-3 text-white" href="#">
+                <a class="nav-link pb-3 pt-3 text-white" href="{{ route('settings') }}">
                     <div class="icon-field"><i class="fas fa-cog"></i></div>
                     Settings
                 </a>
