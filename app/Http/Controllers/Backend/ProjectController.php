@@ -55,6 +55,15 @@ class ProjectController extends Controller
                 'prj_description' => $request->prj_description,
                 'created_at' => $date,
             ]);
+            
+            $data = array();
+            $members = $request->emp_id;
+
+            foreach ($members as $key => $value) {
+                $data['emp_id'] = $request->emp_id;
+                $data['id'] = $value;
+                DB::table('prj_members')->insert($data);
+            }
 
             $success = array(
                 'message' => 'Successfully Project Added',

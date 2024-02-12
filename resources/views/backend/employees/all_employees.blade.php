@@ -49,12 +49,16 @@ p {
                                 <b>{{ $emp->position}}</b>
                             </td>
                             <td>
+                                @if(is_null($emp->start_date) && is_null($emp->end_date))
+                                <p class="text-center"><span class="badge text-bg-primary">Regular Employee</span></p>
+                                @else
                                 <p><b>Start Date: </b><span
                                         class="badge text-bg-info text-white">{{ date('M d, Y', strtotime($emp->start_date)) }}</span>
                                 </p>
                                 <p><b>End Date: </b><span
                                         class="badge text-bg-danger">{{ date('M d, Y', strtotime($emp->end_date)) }}</span>
                                 </p>
+                                @endif
                             </td>
                             <td class="text-center">
                                 @if($emp->status == 'inactive')
@@ -96,14 +100,14 @@ $(document).ready(function() {
             type: "GET",
             url: "/admin/employees/edit/" + emp_id,
             success: function(response) {
-                console.log(response);
+                console.log(response)
                 $('#emp_id').val(response.employees.emp_id)
                 $('#firstname').val(response.employees.firstname);
                 $('#middlename').val(response.employees.middlename);
                 $('#lastname').val(response.employees.lastname);
                 $('#contact').val(response.employees.contact);
                 $('#email').val(response.employees.email);
-                $('#position').val(response.employees.position);
+                $('#position_id').val(response.employees.position_id);
                 $('#address').val(response.employees.address);
                 $('#start_date').val(response.employees.start_date);
                 $('#end_date').val(response.employees.end_date);

@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-md-4 mb-4">
                             <label for="">Position:</label>
-                            <select name="position_id" id="position" class="form-select">
+                            <select name="position_id" id="position_id" class="select3">
                                 <option value=""></option>
                                 @foreach($positions as $position)
                                 <option value="{{ $position->id }}">{{ $position->position }}</option>
@@ -63,8 +63,10 @@
                             <input type="date" name="start_date" id="start_date" class="form-control">
                             <label for="">End Date:</label>
                             <input type="date" name="end_date" id="end_date" class="form-control">
-                            <small><span class="badge text-bg-secondary">Note:</span> Leave the Date Blank if the
+                            <small><span class="badge text-bg-secondary">Note:</span> Leave Blank if the
                                 Employee is Regular</small>
+                            <small><button class="btn btn-secondary btn-sm" type="button" onclick="clearDates()">Clear
+                                    Dates</button></small>
                         </div>
                     </div>
                     <div class="row">
@@ -86,3 +88,9 @@
         </div>
     </div>
 </div>
+<script>
+function clearDates() {
+    document.querySelector("#start_date").value = "";
+    document.querySelector("#end_date").value = "";
+}
+</script>
