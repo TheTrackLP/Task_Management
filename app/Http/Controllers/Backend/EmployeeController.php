@@ -7,14 +7,19 @@ use Illuminate\Http\Request;
 use Validator;
 use DB;
 use App\Models\Employee;
+use App\Models\Position;
 
 class EmployeeController extends Controller
 {
     public function AllEmployees(){
-        $employees = Employee::select('*')
-        ->selectRaw("CONCAT(lastname, ', ',firstname, ' ',middlename) as name")
-        ->get();
-        return view('backend.employees.all_employees', compact('employees'));
+        $employees = DB::table('employees')
+                        ->select('employees.*')
+                        ->selectRaw("CONCAT(employees.lastname, ', ',employees.firstname, ' ',employees.middlename) as name, CONCAT(positions.position) as position")
+                        ->leftjoin('positions', 'positions.id', 'employees.position_id')
+                        ->get();
+
+        $positions = Position::all();
+        return view('backend.employees.all_employees', compact('employees', 'positions'));
     }
     
     public function AddEmployee(Request $request){
@@ -25,7 +30,7 @@ class EmployeeController extends Controller
             'lastname' => 'required',
             'contact' => 'required',
             'email' => 'required',
-            'position' => 'required',
+            'position_id' => 'required',
             'address' => 'required',
         ]);
 
@@ -47,7 +52,7 @@ class EmployeeController extends Controller
                 'contact' => $request->contact,
                 'email' => $request->email,
                 'address' => $request->address,
-                'position' => $request->position,
+                'position_id' => $request->position_id,
                 'status' => 'inactive',
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
@@ -82,7 +87,7 @@ class EmployeeController extends Controller
             'lastname' => 'required',
             'contact' => 'required',
             'email' => 'required',
-            'position' => 'required',
+            'position_id' => 'required',
             'address' => 'required',
         ]);
 
@@ -104,7 +109,7 @@ class EmployeeController extends Controller
                 'contact' => $request->contact,
                 'email' => $request->email,
                 'address' => $request->address,
-                'position' => $request->position,
+                'position_id' => $request->position_id,
                 'status' => $request->status,
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,

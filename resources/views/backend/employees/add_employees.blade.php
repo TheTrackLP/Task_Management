@@ -1,9 +1,8 @@
-<div class="modal fade" id="addEmployee" tabindex="-1">
+<div class="modal fade" id="addEmployee" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5">Add Employee</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="{{ route('add.employee') }}" method="post">
@@ -39,10 +38,11 @@
                         </div>
                         <div class="col-md-4 mb-4">
                             <label for="">Position:</label>
-                            <select name="position" class="form-select">
-                                <option value="" selected disabled>Select Position</option>
-                                <option value="pdo">PDO</option>
-                                <option value="pdo1">PODI</option>
+                            <select name="position_id" class="select2">
+                                <option value=""></option>
+                                @foreach($positions as $position)
+                                <option value="{{ $position->id }}">{{ $position->position }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -69,3 +69,10 @@
         </div>
     </div>
 </div>
+<script>
+$('.select2').select2({
+    placeholder: "Please Select Here",
+    width: "100%",
+    dropdownParent: $('#addEmployee')
+});
+</script>

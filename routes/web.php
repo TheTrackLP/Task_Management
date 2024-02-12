@@ -73,6 +73,8 @@ Route::middleware(['auth', 'roles:admin'])->group(function(){
 
     Route::controller(SettingsController::class)->group(function(){
         Route::get('/admin/settings', 'Settings')->name('settings');
+        Route::post('/admin/settings/add', 'StorePosition')->name('store.settings');
+        Route::get('/admin/settings/delete/{id}', 'DeletePosition')->name('delete.position');
     });
 });
 require __DIR__.'/auth.php';

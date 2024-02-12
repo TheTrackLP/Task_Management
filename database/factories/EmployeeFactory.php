@@ -24,8 +24,8 @@ class EmployeeFactory extends Factory
             'contact' =>  fake()->phoneNumber,
             'email' => fake()->unique()->safeEmail(),
             'address' => fake()->address,
-            'position' => fake()->title(),
-            'status' => '0',
+            'position_id' => fake()->randomDigit,
+            'status' => 'inactive',
             'start_date' => fake()->date(),
             'end_date' => fake()->date(),
         ];

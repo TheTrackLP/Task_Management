@@ -45,10 +45,11 @@
                         </div>
                         <div class="col-md-4 mb-4">
                             <label for="">Position:</label>
-                            <select name="position" id="position" class="form-select">
-                                <option value="" selected disabled>Select Position</option>
-                                <option value="pdo">PDO</option>
-                                <option value="pdo1">PODI</option>
+                            <select name="position_id" id="position" class="form-select">
+                                <option value=""></option>
+                                @foreach($positions as $position)
+                                <option value="{{ $position->id }}">{{ $position->position }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

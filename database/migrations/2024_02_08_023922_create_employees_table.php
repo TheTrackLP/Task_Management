@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('contact');
             $table->string('email');
             $table->mediumText('address');
-            $table->string('position');
+            $table->string('position_id');
             $table->enum('status', ['active', 'inactive']);
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();

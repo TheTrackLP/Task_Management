@@ -36,22 +36,30 @@ p {
                         @endphp
                         @foreach($employees as $emp)
                         <tr>
-                            <td class="text-center">{{ $i++ }}</td>
-                            <td class="text-center">{{ $emp->emp_id }}</td>
-                            <td>{{ $emp->name}}</td>
-                            <td class="text-center">{{ $emp->position}}</td>
+                            <td class="text-center">
+                                <b>{{ $i++ }}</b>
+                            </td>
+                            <td class="text-center">
+                                <b>{{ $emp->emp_id }}</b>
+                            </td>
                             <td>
-                                <p>Start Date: <span
+                                <b>{{ $emp->name}}</b>
+                            </td>
+                            <td class="text-center">
+                                <b>{{ $emp->position}}</b>
+                            </td>
+                            <td>
+                                <p><b>Start Date: </b><span
                                         class="badge text-bg-info text-white">{{ date('M d, Y', strtotime($emp->start_date)) }}</span>
                                 </p>
-                                <p>End Date: <span
+                                <p><b>End Date: </b><span
                                         class="badge text-bg-danger">{{ date('M d, Y', strtotime($emp->end_date)) }}</span>
                                 </p>
                             </td>
                             <td class="text-center">
-                                @if($emp->status == 0)
+                                @if($emp->status == 'inactive')
                                 <span class="badge text-bg-danger">Inactive</span>
-                                @elseif($emp->status == 1)
+                                @elseif($emp->status == 'active')
                                 <span class="badge text-bg-success">Active</span>
                                 @endif
                             </td>
@@ -88,6 +96,7 @@ $(document).ready(function() {
             type: "GET",
             url: "/admin/employees/edit/" + emp_id,
             success: function(response) {
+                console.log(response);
                 $('#emp_id').val(response.employees.emp_id)
                 $('#firstname').val(response.employees.firstname);
                 $('#middlename').val(response.employees.middlename);
