@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header mb-4">
-            <h3>Users</h3>
+            <h3>Admin</h3>
         </div>
         <div class="card-body">
             <div class="table table-responsive table-bordered">
@@ -22,7 +22,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($users as $key => $item)
+                        @foreach($admins as $key => $item)
                         <tr>
                             <td class="text-center">{{ $key+1 }}</td>
                             <td>{{ $item->username }}</td>

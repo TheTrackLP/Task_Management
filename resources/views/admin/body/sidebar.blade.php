@@ -71,8 +71,8 @@
                 </a>
                 <div class="collapse" id="adminUserCollapse">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link text-white" href="layout-static.html">Admin</a>
-                        <a class="nav-link text-white" href="layout-sidenav-light.html">Light Sidenav</a>
+                        <a class="nav-link text-white" href="{{ route('all.admins') }}">Admin</a>
+                        <a class="nav-link text-white" href="{{ route('all.users') }}">Users</a>
                     </nav>
                 </div>
                 <hr>

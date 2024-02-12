@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('prj_members', function (Blueprint $table) {
             $table->id();
-            $table->integer('prj_id');
-            $table->integer('emp_id');
+            $table->string('prj_id')->nullable();
+            $table->string('emp_id')->nullable();
             $table->date('added_on');
         });
     }

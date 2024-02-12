@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Project;
 use App\Models\Task;
+use App\Models\PrjMember;
 use Validator;
 use DB;
 
@@ -46,7 +47,8 @@ class ProjectController extends Controller
             return redirect()->route('all.projects')->with($fails);
         } else {
             $date = date('Y-m-d');
-            Project::insert([
+            //insertGetId it will take the newly inserted ID and you can you it as a foreign key
+            $project = Project::insertGetId([
                 'prj_name' => $request->prj_name,
                 'leader_empid' => $request->leader_empid,
                 'status' => '0',
@@ -58,10 +60,12 @@ class ProjectController extends Controller
             
             $data = array();
             $members = $request->emp_id;
+            $date = date('Y-m-d');
 
-            foreach ($members as $key => $value) {
-                $data['emp_id'] = $request->emp_id;
-                $data['id'] = $value;
+            foreach ($members as $value) {
+                $data['prj_id'] = $project;
+                $data['added_on'] = $date;
+                $data['emp_id'] = $value;
                 DB::table('prj_members')->insert($data);
             }
 
@@ -90,7 +94,15 @@ class ProjectController extends Controller
                     ->where('prj_id', $id)
                     ->get();
 
-        return view('backend.projects.view_projects', compact('projects', 'emps', 'taskPrj'));
+        $members = DB::table('prj_members')
+                        ->select('prj_members.*')
+                        ->selectRaw("CONCAT(employees.lastname, ', ', employees.firstname, ' ', employees.middlename) as name")
+                        ->join('employees', 'employees.emp_id', '=', 'prj_members.emp_id')
+                        ->where('prj_members.prj_id', $id)
+                        ->get();
+
+
+        return view('backend.projects.view_projects', compact('projects', 'emps', 'taskPrj', 'members'));
     }
 
     public function EditProjects($id){
@@ -147,6 +159,16 @@ class ProjectController extends Controller
 
         $success = array(
             'message' => 'Successfully Project Deleted',
+            'alert-type' => 'warning',
+        );
+
+        return redirect()->route('all.projects')->with($success);
+    }
+
+    public function DeleteMember($id){
+        PrjMember::findorfail($id)->delete();
+        $success = array(
+            'message' => 'Successfully Deleted a Member',
             'alert-type' => 'warning',
         );
 

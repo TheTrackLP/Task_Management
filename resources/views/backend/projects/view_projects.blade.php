@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-sm-6">
                     <label for="" class="bold">Status</label>
                     @if($projects->status === '0')
                     <p><span class="badge text-bg-secondary">Pending</span></p>
@@ -31,17 +31,17 @@
                     <p><span class="badge text-bg-success">Complete</span></p>
                     @endif
                 </div>
-                <div class="col-md-6">
+                <div class="col-sm-6">
                     <label for="" class="bold">Start Date</label>
                     <p>{{ date('F d, Y', strtotime($projects->start_date)) }}</p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-sm-6">
                     <label for="" class="bold">Project Manager</label>
                     <p>{{ $projects->manager }}</p>
                 </div>
-                <div class="col-md-6">
+                <div class="col-sm-6">
                     <label for="" class="bold">End Date</label>
                     <p>{{ date('F d, Y', strtotime($projects->end_date)) }}</p>
                 </div>
@@ -67,15 +67,25 @@
                             <tr>
                                 <th class="text-center">#</th>
                                 <th>Name</th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                            $i = 1;
+                            @endphp
+                            @foreach($members as $member)
                             <tr>
-                                <td class="text-center">1</td>
-                                <td>Name</td>
-                                <td>Delete</td>
+                                <td class="text-center">{{ $i++ }}</td>
+                                <td>
+                                    {{ $member->name }}
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('delete.member', $member->id) }}" id="delete"
+                                        class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

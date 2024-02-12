@@ -48,7 +48,7 @@ label {
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Project Team Members</label>
-                        <select name="emp_id[]" class="select2">
+                        <select name="emp_id[]" class="select2" multiple="multiple">
                             <option value=""></option>
                             @foreach($emps as $emp)
                             <option value="{{ $emp->emp_id }}">{{ $emp->name }} | {{ $emp->position }}</option>

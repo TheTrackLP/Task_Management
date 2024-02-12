@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\TaskController;
 use App\Http\Controllers\Backend\ProjectController;
 use App\Http\Controllers\Backend\LeaveController;
@@ -39,6 +40,11 @@ Route::middleware(['auth', 'roles:admin'])->group(function(){
 
     Route::controller(AdminController::class)->group(function(){
         Route::get('/admin/dashboard', 'AdminDashboard')->name('admin.dashboard');
+        Route::get('/admin/users/admins', 'AllAdmin')->name('all.admins');
+    });
+
+    Route::controller(UserController::class)->group(function(){
+        Route::get('/admin/users', 'AllUsers')->name('all.users');
     });
 
     Route::controller(EmployeeController::class)->group(function(){
@@ -65,6 +71,8 @@ Route::middleware(['auth', 'roles:admin'])->group(function(){
         Route::get('/admin/edit/projects/{id}', 'EditProjects')->name('edit.projects');
         Route::post('/admin/update/projects', 'UpdateProjects')->name('update.projects');
         Route::get('/admin/delete/projects/{id}', 'DeleteProjects')->name('delete.projects');
+
+        Route::get('/admin/view/projects/delete/member/{id}', 'DeleteMember')->name('delete.member');
     });
 
     Route::controller(LeaveController::class)->group(function(){
