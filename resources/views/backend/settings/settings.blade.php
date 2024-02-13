@@ -56,6 +56,60 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-4 mt-4">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h3>Add Leave</h3>
+                </div>
+                <form action="{{ route('store.leave') }}" method="post">
+                    @csrf
+                    <div class="card-body">
+                        <label for="" class="mb-3"><b>Type of Leave:</b></label>
+                        <input type="text" name="type_leave" id="" class="form-control">
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success float-end px-5 my-3">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8 mt-4">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h3>Leaves</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-bordered" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th>Type of Leave</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                            $i = 1;
+                            @endphp
+                            @foreach($leaves as $leave)
+                            <tr>
+                                <td class="text-center">{{ $i++ }}</td>
+                                <td>
+                                    <b>{{ $leave->type_leave}}</b>
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('delete.leave', $leave->id) }}" class="btn btn-danger"
+                                        id="delete"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection
