@@ -78,7 +78,9 @@ switch (type) {
 @endif
 
 $(document).ready(function() {
-    $('#dataTable').DataTable();
+    $('#dataTable').DataTable({
+        pageLength: 5,
+    });
 });
 
 $(document).ready(function() {

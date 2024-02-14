@@ -16,7 +16,6 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'Admin',
                 'username' => 'Admin',
                 'emp_id' => '123',
                 'email' => 'admin@gmail.com',
@@ -26,7 +25,6 @@ class UserSeeder extends Seeder
             
             ],
             [
-                'name' => 'User',
                 'username' => 'User',
                 'emp_id' => '123',
                 'email' => 'user@gmail.com',

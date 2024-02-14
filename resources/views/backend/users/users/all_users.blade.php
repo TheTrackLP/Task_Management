@@ -1,12 +1,13 @@
 @extends('admin.body.header');
 @section('admin')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header mb-4">
             <h3>Users</h3>
+            <button class="btn btn-info text-white btn-lg float-end mb-2 px-5" data-bs-toggle="modal"
+                data-bs-target="#addUser"><i class="fa-solid fa-plus"></i> Add User Account</button>
         </div>
         <div class="card-body">
             <div class="table table-responsive table-bordered">
@@ -57,4 +58,19 @@
     </div>
 </div>
 
+<script>
+const getvalue = () => {
+    var user_id = $('#user_id').val();
+    $.ajax({
+        type: "GET",
+        url: "/admins/users/" + user_id,
+        success: function(response) {
+            $('#email').val(response.data.email);
+            $('#emp_id').val(response.data.emp_id);
+            $('#status').val(response.data.status);
+        }
+    });
+}
+</script>
+@include('backend.users.users.add_users')
 @endsection

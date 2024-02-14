@@ -41,10 +41,7 @@ Route::middleware(['auth', 'roles:admin'])->group(function(){
     Route::controller(AdminController::class)->group(function(){
         Route::get('/admin/dashboard', 'AdminDashboard')->name('admin.dashboard');
         Route::get('/admin/users/admins', 'AllAdmin')->name('all.admins');
-    });
-
-    Route::controller(UserController::class)->group(function(){
-        Route::get('/admin/users', 'AllUsers')->name('all.users');
+        Route::get('/admin/logout', 'AdminLogout')->name('admin.logout');
     });
 
     Route::controller(EmployeeController::class)->group(function(){
@@ -86,6 +83,19 @@ Route::middleware(['auth', 'roles:admin'])->group(function(){
 
         Route::post('/admin/settings/leave/add', 'StoreLeave')->name('store.leave');
         Route::get('/admin/settings/leave/delete/{id}', 'DeleteLeave')->name('delete.leave');    
+    });
+
+    Route::controller(UserController::class)->group(function(){
+        Route::get('/admins/users', 'AllUsers')->name('all.users');
+        Route::get('/admins/users/{id}', 'GetUsers');
+        Route::post('/admin/users/add', 'StoreUser')->name('store.user');
+    });
+});
+
+Route::middleware(['auth', 'roles:user'])->group(function(){
+    Route::controller(UserController::class)->group(function(){
+        Route::get('/user/dashboard', 'UserDashboard')->name('user.dashboard');
+        Route::get('/user/logout', 'UserLogout')->name('user.logout');
     });
 });
 require __DIR__.'/auth.php';
