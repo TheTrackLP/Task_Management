@@ -20,8 +20,8 @@
                                     <label for="" class="mb-2">Assign Task to:</label>
                                     <select name="emp_id" class="select4">
                                         <option value=""></option>
-                                        @foreach($emps as $emp)
-                                        <option value="{{ $emp->emp_id }}">{{ $emp->name}} | {{$emp->position}}
+                                        @foreach($members as $emp)
+                                        <option value="{{ $emp->emp_id }}">{{ $emp->name}} | {{$emp->occupation}}
                                         </option>
                                         @endforeach
                                     </select>

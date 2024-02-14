@@ -42,7 +42,7 @@ label {
                         <select name="leader_empid" class="form-select sl2">
                             <option value=""></option>
                             @foreach($emps as $emp)
-                            <option value="{{ $emp->id }}">{{ $emp->name }} | {{ $emp->position }}</option>
+                            <option value="{{ $emp->id }}">{{ $emp->name }} | {{ $emp->occu }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -51,7 +51,7 @@ label {
                         <select name="emp_id[]" class="select2" multiple="multiple">
                             <option value=""></option>
                             @foreach($emps as $emp)
-                            <option value="{{ $emp->emp_id }}">{{ $emp->name }} | {{ $emp->position }}</option>
+                            <option value="{{ $emp->emp_id }}">{{ $emp->name }} | {{ $emp->occu }}</option>
                             @endforeach
                         </select>
                     </div>

@@ -23,9 +23,13 @@ class ProjectController extends Controller
     }
 
     public function AddProjects(){
-        $emps = Employee::select('*')
-                            ->selectRaw("CONCAT(lastname, ', ', firstname, ' ', middlename) as name")
-                            ->get();
+        $emps = DB::table('employees')
+                    ->select('employees.*')
+                    ->selectRaw("CONCAT(employees.lastname, ', ', employees.firstname, ' ', employees.middlename) as name")
+                    ->selectRaw("CONCAT(positions.position) as occu")
+                    ->join('positions', 'positions.id', '=', 'employees.position_id')
+                    ->get();
+                    
         return view('backend.projects.add_projects', compact('emps'));
     }
 
@@ -86,23 +90,20 @@ class ProjectController extends Controller
         ->where('projects.id',$id)
         ->first();
 
-        $emps = Employee::select('*')
-        ->selectRaw("CONCAT(lastname, ', ', firstname, ' ', middlename) as name")
-        ->get();
-
         $taskPrj = DB::table('tasks')
                     ->where('prj_id', $id)
                     ->get();
 
         $members = DB::table('prj_members')
                         ->select('prj_members.*')
-                        ->selectRaw("CONCAT(employees.lastname, ', ', employees.firstname, ' ', employees.middlename) as name")
+                        ->selectRaw("CONCAT(employees.lastname, ', ', employees.firstname, ' ', employees.middlename) as name, CONCAT(positions.position) as occupation")
                         ->join('employees', 'employees.emp_id', '=', 'prj_members.emp_id')
+                        ->join('positions', 'positions.id', '=', 'employees.position_id')
                         ->where('prj_members.prj_id', $id)
                         ->get();
 
 
-        return view('backend.projects.view_projects', compact('projects', 'emps', 'taskPrj', 'members'));
+        return view('backend.projects.view_projects', compact('projects', 'taskPrj', 'members'));
     }
 
     public function EditProjects($id){

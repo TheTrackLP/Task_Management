@@ -73,6 +73,7 @@ body {
             <div class="col-md-9 border-right">
                 <div class="card mb-3 mt-3">
                     <div class="card-body">
+                        @if(!is_null($partProject))
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="" class="bold">Project Name</label>
@@ -112,6 +113,25 @@ body {
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" role="document" id="prjDesc" tabindex="-1" data-bs-backdrop="static"
+                        data-bs-keyboard="false">
+                        <div class="modal-dialog modal-lg" role="dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3>Project Description</h3>
+                                </div>
+                                <div class="modal-body">
+                                    {!! $partProject->prj_description !!}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @else
+                    <p class="text-center">Not Part of any Projects yet</p>
+                    @endif
                 </div>
                 <hr>
                 <div class="card">
@@ -190,20 +210,5 @@ body {
         </div>
     </div>
 </body>
-<div class="modal fade" role="document" id="prjDesc" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-lg" role="dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Project Description</h3>
-            </div>
-            <div class="modal-body">
-                {!! $partProject->prj_description !!}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 </html>
