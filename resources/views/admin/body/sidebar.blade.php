@@ -56,10 +56,11 @@
                 </a>
                 <div class="collapse" id="rolesCollapse">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link text-white" href="layout-static.html">All Permissions</a>
-                        <a class="nav-link text-white" href="layout-sidenav-light.html">All Roles</a>
+                        <a class="nav-link text-white" href="{{ route('all.permissions') }}">All Permissions</a>
+                        <a class="nav-link text-white" href="{{ route('all.roles') }}">All Roles</a>
                         <a class="nav-link text-white" href="layout-sidenav-light.html">Role in Permission</a>
-                        <a class="nav-link text-white" href="layout-sidenav-light.html">All Roles and Permission</a>
+                        <a class="nav-link text-white" href="{{ route('all.roles.permissions') }}">All Roles and
+                            Permission</a>
                     </nav>
                 </div>
                 <hr>

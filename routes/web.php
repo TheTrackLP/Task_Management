@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\ProjectController;
 use App\Http\Controllers\Backend\LeaveController;
 use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\SettingsController;
+use App\Http\Controllers\Backend\RoleController;
 
 
 /*
@@ -89,6 +90,21 @@ Route::middleware(['auth', 'roles:admin'])->group(function(){
         Route::get('/admins/users', 'AllUsers')->name('all.users');
         Route::get('/admins/users/{id}', 'GetUsers');
         Route::post('/admin/users/add', 'StoreUser')->name('store.user');
+    });
+
+    Route::controller(RoleController::class)->group(function(){
+        Route::get('/admin/roles', 'AllRoles')->name('all.roles');
+        Route::post('/admin/roles/add', 'AddRoles')->name('add.roles');
+        Route::get('/admin/roles/edit/{id}', 'EditRoles')->name('edit.role');
+        Route::get('/admin/roles/delete/{id}', 'DeleteRoles')->name('delete.roles');
+        
+        Route::get('/admin/permissions', 'AllPermissions')->name('all.permissions');
+        Route::post('/admin/permissions/add', 'AddPermissions')->name('add.permissions');
+        Route::get('/admin/permissions/delete/{id}', 'DeletePermission')->name('delete.permissions');
+
+        Route::get('/admin/roles/permissions', 'AllRolesNPermissions')->name('all.roles.permissions');
+        Route::post('/admin/role/permissions/add', 'AddRolesNPermissions')->name('add.roles.permissions');
+        Route::get('/admin/role/permission/edit/{id}', 'EditRolePermission')->name('edit.role.permissions');
     });
 });
 
