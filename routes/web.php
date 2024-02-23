@@ -43,6 +43,8 @@ Route::middleware(['auth', 'roles:admin'])->group(function(){
         Route::get('/admin/dashboard', 'AdminDashboard')->name('admin.dashboard');
         Route::get('/admin/users/admins', 'AllAdmin')->name('all.admins');
         Route::get('/admin/logout', 'AdminLogout')->name('admin.logout');
+        Route::get('/admin/edit/{id}', 'getEmpData')->name('admin.edit');
+        Route::post('/admin/add', 'AddAccount')->name('add.admins');
     });
 
     Route::controller(EmployeeController::class)->group(function(){

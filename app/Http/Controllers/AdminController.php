@@ -7,9 +7,12 @@ use App\Models\User;
 use App\Models\Employee;
 use App\Models\Task;
 use App\Models\Project;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use DB;
 use Validator;
 use Auth;
+use Hash;
 
 class AdminController extends Controller
 {
@@ -33,8 +36,15 @@ class AdminController extends Controller
     }
 
     public function AllAdmin(){
-        $admins = User::where('role', 'admin')->get();
-        return view('backend.users.admins.all_admins', compact('admins'));
+        $emps = DB::table('employees')
+                    ->select('employees.*')
+                    ->selectRaw("CONCAT(employees.lastname, ', ', employees.firstname, ' ', employees.middlename) as name")
+                    ->selectRaw("CONCAT(positions.position) as occupation")
+                    ->join('positions', 'positions.id', '=', 'employees.position_id')
+                    ->get();
+        $accts = User::all();
+        $roles = Role::all();
+    return view('backend.accounts.all_accounts', compact('emps', 'accts', 'roles'));
     }
 
     public function AdminLogout(Request $request){
@@ -46,4 +56,50 @@ class AdminController extends Controller
 
         return redirect('/');
     }
+
+    public function getEmpData($id){
+        $employee = Employee::findorfail($id);
+        return response()->json([
+            'status'=>200,
+            'employee'=>$employee,
+        ]);
+    }
+    
+    public function AddAccount(Request $request){
+        $valid = Validator::make($request->all(), [
+            'username' => 'required',
+            'password' => 'required',
+            'role' => 'required',
+        ]);
+
+        if($valid->fails()){
+            $fails = [
+                'message' => 'Error, Try Again!',
+                'alert-type' => 'error',
+            ];
+
+            return redirect()->route('all.admins')->with($fails);
+        } else {
+            $accts = User::create([
+                'username' => $request->username,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+                'emp_id' => $request->emp_id,
+                'email' => $request->email,
+                'status' => $request->status,
+            ]);
+
+            if($request->roles){
+                $accts->assignRole($request->roles);
+            }
+
+            $success = [
+                'message' => 'Created Account Successfully',
+                'alert-type' => 'success',
+            ];
+
+            return redirect()->route('all.admins')->with($success);
+        }
+    }
+
 }

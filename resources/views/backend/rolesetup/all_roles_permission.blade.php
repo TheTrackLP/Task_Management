@@ -31,7 +31,7 @@
                                         @endforeach
                                     </td>
                                     <td>
-                                        <a href="{{ route('edit.role.permissions', $prem->id) }}"
+                                        <a href="{{ route('edit.role.permissions', $item->id) }}"
                                             class="btn btn-inverse-warning">Edit</button>
                                             <a href="" class="btn btn-inverse-danger" id="delete">Delete</a>
                                     </td>

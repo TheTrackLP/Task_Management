@@ -64,18 +64,10 @@
                     </nav>
                 </div>
                 <hr>
-                <a class="nav-link text-white collapsed" href="#" data-bs-toggle="collapse"
-                    data-bs-target="#adminUserCollapse" aria-expanded="false">
-                    <div class="icon-field"><i class="fas fa-columns"></i></div>
-                    Admin / Users
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                <a class="nav-link pb-3 pt-3 text-white" href="{{ route('all.admins') }}">
+                    <div class="icon-field"><i class="fas fa-list-alt"></i></div>
+                    Account Management
                 </a>
-                <div class="collapse" id="adminUserCollapse">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link text-white" href="{{ route('all.admins') }}">Admin</a>
-                        <a class="nav-link text-white" href="{{ route('all.users') }}">Users</a>
-                    </nav>
-                </div>
                 <hr>
                 <a class="nav-link pb-3 pt-3 text-white" href="{{ route('settings') }}">
                     <div class="icon-field"><i class="fas fa-cog"></i></div>
