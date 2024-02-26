@@ -14,13 +14,14 @@
         </div>
         <div class="card-body">
             <table class="table table-hovered table-bordered">
-                <thead>
+                <thead class="table-dark">
                     <tr>
                         <th class="text-center">ID #</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th class="text-center">Role</th>
                         <th class="text-center">Status</th>
+                        <th class="text-center">User Type</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -37,7 +38,16 @@
                             {{ $acct->email }}
                         </td>
                         <td class="text-center">
-                            Role
+                            @foreach($acct->roles as $roles)
+                            <span class="badge bg-primary">{{$roles->name}}</span>
+                            @endforeach
+                        </td>
+                        <td class="text-center">
+                            @if($acct->role == 'admin')
+                            <span class="badge text-bg-primary">Admin</span>
+                            @elseif($acct->role == 'user')
+                            <span class="badge text-bg-secondary">User</span>
+                            @endif
                         </td>
                         <td class="text-center">
                             @if($acct->status == 'inactive')
@@ -53,8 +63,13 @@
                                     Action
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-edit"></i> Edit</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fas fa-trash-alt"></i> Delete</a>
+                                    <li><button class="dropdown-item" id="editBtn" value="{{ $acct->id }}"><i
+                                                class="fas fa-edit"></i>
+                                            Edit</button>
+                                    </li>
+                                    <li><a class="dropdown-item" id="delete"
+                                            href="{{ route('delete.account', $acct->id) }}"><i
+                                                class="fas fa-trash-alt"></i> Delete</a>
                                     </li>
                                 </ul>
                             </div>
@@ -67,6 +82,7 @@
     </div>
 </div>
 @include('backend.accounts.add_accounts')
+@include('backend.accounts.edit_accounts')
 
 <script>
 const getData = () => {
@@ -81,5 +97,28 @@ const getData = () => {
         }
     });
 }
+
+$(document).ready(function() {
+    $(document).on('click', '#editBtn', function() {
+        var acct_id = $(this).val();
+        alert(acct_id)
+        $('#editAcct').modal('show');
+
+        $.ajax({
+            type: "GET",
+            url: "/admin/account/edit/" + acct_id,
+            success: function(res) {
+                console.log(res)
+                $('#role').val(res.acct.role);
+                $('#username').val(res.acct.username);
+                $('#empiI').val(res.acct.emp_id);
+                $('#empIid').val(res.acct.empp_id)
+                $('#roles').val(res.acct.role_id);
+                $('#mail').val(res.acct.email);
+                $('#id').val(acct_id);
+            }
+        });
+    });
+});
 </script>
 @endsection

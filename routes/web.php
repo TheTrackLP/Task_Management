@@ -45,6 +45,9 @@ Route::middleware(['auth', 'roles:admin'])->group(function(){
         Route::get('/admin/logout', 'AdminLogout')->name('admin.logout');
         Route::get('/admin/edit/{id}', 'getEmpData')->name('admin.edit');
         Route::post('/admin/add', 'AddAccount')->name('add.admins');
+        Route::get('/admin/account/edit/{id}', 'EditAccount')->name('edit.account');
+        Route::post('/admin/account/update', 'UpdateAccount')->name('update.account');
+        Route::get('/admin/account/detele/{id}', 'DeleteAccount')->name('delete.account');
     });
 
     Route::controller(EmployeeController::class)->group(function(){

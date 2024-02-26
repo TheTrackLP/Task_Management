@@ -42,9 +42,11 @@ class AdminController extends Controller
                     ->selectRaw("CONCAT(positions.position) as occupation")
                     ->join('positions', 'positions.id', '=', 'employees.position_id')
                     ->get();
-        $accts = User::all();
-        $roles = Role::all();
-    return view('backend.accounts.all_accounts', compact('emps', 'accts', 'roles'));
+        $accts = User::select('*')
+                        ->orderBy('role', 'asc')
+                        ->get();
+        $roless = Role::all();
+    return view('backend.accounts.all_accounts', compact('emps', 'accts', 'roless'));
     }
 
     public function AdminLogout(Request $request){
@@ -82,11 +84,11 @@ class AdminController extends Controller
         } else {
             $accts = User::create([
                 'username' => $request->username,
-                'password' => Hash::make($request->password),
-                'role' => $request->role,
                 'emp_id' => $request->emp_id,
                 'email' => $request->email,
-                'status' => $request->status,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+                'status' => 'active',
             ]);
 
             if($request->roles){
@@ -102,4 +104,65 @@ class AdminController extends Controller
         }
     }
 
+    public function EditAccount($id){
+        $acct = DB::table('users')
+        ->select('users.*')
+        ->selectRaw("CONCAT(employees.lastname, ', ', employees.firstname, ' ', employees.middlename) as name")
+        ->selectRaw("employees.id as empp_id, roles.id as role_id")
+        ->join('employees', 'employees.emp_id', '=', 'users.emp_id')
+        ->join('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
+        ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+        ->where('users.id', $id)
+        ->first();
+        return response()->json([
+            'status'=>200,
+            'acct'=>$acct,
+        ]);
+    }
+
+    public function UpdateAccount(Request $request){
+        $user_id = $request->id;
+        $valid = Validator::make($request->all(), [
+            'username' => 'required',
+            'role' => 'required',
+        ]);
+
+        if($valid->fails()){
+            $fail = array(
+                'message' => 'Error, Try Again!',
+                'alert-type' => 'error',
+            );
+        } else {
+            $user = User::findorfail($user_id);
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->status = 'active';
+            $user->role = $request->role;
+            $user->save();
+            
+            $user->roles()->detach();
+            if($request->roles){
+                $user->assignRole($request->roles);
+            }
+
+            
+        $notification = array(
+            'message' => 'Account Updated Successfully',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->route('all.admins')->with($notification);
+        }
+    }
+
+    public function DeleteAccount($id){
+        User::findorfail($id)->delete();
+                    
+        $notification = array(
+            'message' => 'Account Deleted Successfully',
+            'alert-type' => 'warning',
+        );
+
+        return redirect()->route('all.admins')->with($notification);
+    }
 }
