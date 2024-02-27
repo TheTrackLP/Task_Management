@@ -16,6 +16,7 @@
             <a class="dropdown-toggle text-white" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{{ route('my.profile') }}">My Tasks/Profile</a></li>
                 <li><a class="dropdown-item" href="{{ route('admin.logout') }}">Logout <i
                             class="fas fa-power-off"></i></a></li>
             </ul>
