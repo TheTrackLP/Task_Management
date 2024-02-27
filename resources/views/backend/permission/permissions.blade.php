@@ -48,8 +48,8 @@ td {
                     <h5>Permissions</h5>
                 </div>
                 <div class="card-body">
-                    <table class="table table-hovered table-bordered">
-                        <thead>
+                    <table class="table table-hovered table-bordered" id="RolePermissionTable">
+                        <thead class="table-dark">
                             <tr>
                                 <th class="text-center">#</th>
                                 <th>Permission Name</th>

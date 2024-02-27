@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/task.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -93,6 +94,12 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#borrowerTable').DataTable();
+});
+
+$(document).ready(function() {
+    $('#RolePermissionTable').DataTable({
+        pageLength: 5,
+    });
 });
 
 $("#summernote").summernote({

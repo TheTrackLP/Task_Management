@@ -20,8 +20,8 @@
                         <th>Username</th>
                         <th>Email</th>
                         <th class="text-center">Role</th>
-                        <th class="text-center">Status</th>
                         <th class="text-center">User Type</th>
+                        <th class="text-center">Status</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>

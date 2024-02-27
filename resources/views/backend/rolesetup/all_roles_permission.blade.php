@@ -1,6 +1,11 @@
 @extends('admin.body.header')
 @section('admin')
-
+<style>
+tr,
+td {
+    text-transform: capitalize;
+}
+</style>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">

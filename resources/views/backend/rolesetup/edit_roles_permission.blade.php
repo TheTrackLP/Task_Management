@@ -1,6 +1,11 @@
 @extends('admin.body.header')
 @section('admin')
-
+<style>
+tr,
+td {
+    text-transform: capitalize;
+}
+</style>
 <div class="container-fluid">
     <div class="col-md-8">
         <div class="row">
@@ -9,7 +14,9 @@
                     <h4>Edit Roles and Permission</h4>
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form method="post" action="{{ route('update.roles.permission', $role->id) }}"
+                        enctype="multipart/form-data">
+                        @csrf
                         <div class="mb-3">
                             <label for="">Role Name</label>
                             <h4>{{ $role->name }}</h4>

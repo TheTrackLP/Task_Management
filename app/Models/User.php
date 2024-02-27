@@ -49,6 +49,7 @@ class User extends Authenticatable
         return $permi_groups;
     }
 
+
     public static function getpermissionByGroupName($group_name){
         $permissions = DB::table('permissions')
                             ->select('id', 'name')
@@ -60,7 +61,7 @@ class User extends Authenticatable
     public static function roleHasPermissions($role, $permissions){
         $hasPermission = true;
         foreach ($permissions as $permission) {
-            if(!$role->HasPermissionTo($permission->name)){
+            if(!$role->hasPermissionTo($permission->name)){
                 $hasPermission = false;
             }
         }
